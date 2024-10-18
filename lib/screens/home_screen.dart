@@ -26,11 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
       if (data.isNotEmpty) {
         setState(() {
           _definition = data[0]['meanings'][0]['definitions'][0]['definition'];
-          _secondDef =  data[0]['meanings'][1]['definitions'][1]['definition'];
+          _secondDef =  data[0]['meanings'][0]['definitions'][1]['definition'];
         });
       } else {
         setState(() {
           _definition = 'The meaning is not found';
+          _secondDef = 'The meaning is not found';
         });
       }
     }
