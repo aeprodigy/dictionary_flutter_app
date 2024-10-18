@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Center(child: Text('D E F I N E', style: TextStyle(color: Colors.white),)),
+        title: const Center(child: Text('D E F I N E', style: TextStyle(color: Colors.white),)),
         backgroundColor: Colors.green[300],
       ),
       body: Padding(
@@ -49,22 +49,22 @@ class _HomeScreenState extends State<HomeScreen> {
             //the textfield
             TextField(
               controller: _controller,
-              decoration: InputDecoration(
+              decoration:const InputDecoration(
                 hintText: 'Please enter word',
               ),
             ),
-            SizedBox(height: 20,),
+           const SizedBox(height: 20,),
             //the btn
             ElevatedButton(
                 onPressed: () {
                   _fetchDefinition(_controller.text);
                 },
                 child: Text('Search'),),
-                SizedBox(
+               const SizedBox(
               height: 20,
             ),
             //the results
-            Text(_definition, style: TextStyle(fontStyle:FontStyle.italic),),
+            Text(_definition, style:const TextStyle(fontStyle:FontStyle.italic),),
           ],
         ),
       ),
