@@ -76,19 +76,37 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  _definition,
-                  style: const TextStyle(fontStyle: FontStyle.italic),
-                ),
+                _definition != null && _definition.isNotEmpty
+                    ? Container(
+                        height: 100,
+                        width: 300,
+                        color: Colors.grey[100],
+                        child: Center(
+                          child: Text(
+                            _definition,
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: Colors.grey[500]),
+                          ),
+                        ),
+                      )
+                    : Text(''),
                 SizedBox(
                   height: 20,
                 ),
-                _secondDef == null ? Text('Second Definition')  : Text('')
+                _secondDef != null && _secondDef.isNotEmpty ?
+               Container(
+                height: 100,
+                width: 300,
+                color: Colors.grey[100],
+                 child: Center(
+                   child: Text(
+                      _secondDef,
+                      style:  TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500]),
+                    ),
+                 ),
+               ) : Text('') 
                 ,
-               Text(
-                  _secondDef,
-                  style: const TextStyle(fontStyle: FontStyle.italic),
-                ),
               ],
             )
           ],
