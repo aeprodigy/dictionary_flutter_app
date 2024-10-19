@@ -54,21 +54,70 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             //the textfield
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                hintText: 'Please enter word',
+            // Row for the TextField and Button
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  // Expanded allows the TextField to take up available space
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        hintText: 'Please enter word',
+                        
+                        hintStyle: TextStyle(
+                            color: Colors.grey[400]), // Custom hint text color
+                        filled: true,
+                        fillColor: Colors
+                            .grey[100], // Background color for the TextField
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10), // Padding inside the TextField
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              5), // Border radius for the TextField
+                          borderSide: BorderSide(
+                            color: Colors
+                                .grey.shade300, // Border color when not focused
+                            width: 1, // Border width
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                              5), // Border radius for focused state
+                          borderSide: BorderSide(
+                            color: Colors
+                                .green.shade400, // Border color when focused
+                            width: 2, // Border width when focused
+                          ),
+                        ),
+                      ),
+                      style: TextStyle(color: Colors.green[400]),
+                      
+                    ),
+                  ),
+                  const SizedBox(
+                      width:
+                          10), // Add some space between the TextField and Button
+                  ElevatedButton(
+                    onPressed: () {
+                      _fetchDefinition(_controller.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shadowColor: Colors.grey[400],
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Removes border radius
+                            
+                      ),
+                    ),
+                    child:  Text('Search', style: TextStyle(color: Colors.green[300]),),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            //the btn
-            ElevatedButton(
-              onPressed: () {
-                _fetchDefinition(_controller.text);
-              },
-              child: Text('Search'),
             ),
             const SizedBox(
               height: 20,
@@ -94,11 +143,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ]
                         ),
                         child: Center(
-                          child: Text(
-                            _definition,
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                color: Colors.grey[500]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _definition,
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.grey[500]),
+                            ),
                           ),
                         ),
                       )
