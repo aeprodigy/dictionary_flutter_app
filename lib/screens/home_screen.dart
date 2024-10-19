@@ -81,7 +81,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Container(
                         height: 100,
                         width: 300,
-                        color: Colors.grey[100],
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade400,
+                              offset: Offset(5, 5),
+                              blurRadius: 12,
+                              spreadRadius: 1,
+                            ),
+                          ]
+                        ),
                         child: Center(
                           child: Text(
                             _definition,
@@ -99,12 +110,25 @@ class _HomeScreenState extends State<HomeScreen> {
                Container(
                 height: 100,
                 width: 300,
-                color: Colors.grey[100],
+                decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                offset: Offset(5, 5),
+                                blurRadius: 12,
+                                spreadRadius: 1,
+                              ),
+                            ]),
                  child: Center(
-                   child: Text(
-                      _secondDef,
-                      style:  TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500]),
-                    ),
+                   child: Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Text(
+                        _secondDef,
+                        style:  TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500]),
+                      ),
+                   ),
                  ),
                ) : Text('') 
                 ,
