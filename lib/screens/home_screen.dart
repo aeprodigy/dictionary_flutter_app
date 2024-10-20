@@ -13,27 +13,36 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _controller = TextEditingController();
   String _definition = '';
-  String _secondDef = '';
   bool _isLoading = false;
 
   //the method to fetch the definition
   Future<void> _fetchDefinition(String word) async {
-    final response = await http.get(
-        Uri.parse('https://api.dictionaryapi.dev/api/v2/entries/en/$word'));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      final response = await http.get(
+          Uri.parse('https://api.dictionaryapi.dev/api/v2/entries/en/$word'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
 
-      if (data.isNotEmpty) {
-        setState(() {
-          _definition = data[0]['meanings'][0]['definitions'][0]['definition'];
-          _secondDef =  data[0]['meanings'][0]['definitions'][1]['definition'];
-        });
-      } else {
-        setState(() {
-          _definition = 'The meaning is not found';
-          _secondDef = 'The meaning is not found';
-        });
+        if (data.isNotEmpty) {
+          setState(() {
+            _definition =
+                data[0]['meanings'][0]['definitions'][0]['definition'];
+          });
+        } else {
+          setState(() {
+            _definition = 'The meaning is not found';
+          });
+        }
       }
+    } catch (e) {
+      setState(() {
+        _definition = 'Error something went wrong';
+      });
+    } finally {
+      _isLoading = false;
     }
   }
 
@@ -65,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: _controller,
                       decoration: InputDecoration(
                         hintText: 'Please enter word',
-                        
+
                         hintStyle: TextStyle(
                             color: Colors.grey[400]), // Custom hint text color
                         filled: true,
@@ -94,7 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       style: TextStyle(color: Colors.green[400]),
-                      
                     ),
                   ),
                   const SizedBox(
@@ -111,10 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.zero, // Removes border radius
-                            
                       ),
                     ),
-                    child:  Text('Search', style: TextStyle(color: Colors.green[300]),),
+                    child: Text(
+                      'Search',
+                      style: TextStyle(color: Colors.green[300]),
+                    ),
                   ),
                 ],
               ),
@@ -131,17 +141,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 100,
                         width: 300,
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade400,
-                              offset: Offset(5, 5),
-                              blurRadius: 12,
-                              spreadRadius: 1,
-                            ),
-                          ]
-                        ),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                offset: Offset(5, 5),
+                                blurRadius: 12,
+                                spreadRadius: 1,
+                              ),
+                            ]),
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -158,32 +167,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                _secondDef != null && _secondDef.isNotEmpty ?
-               Container(
-                height: 100,
-                width: 300,
-                decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade400,
-                                offset: Offset(5, 5),
-                                blurRadius: 12,
-                                spreadRadius: 1,
-                              ),
-                            ]),
-                 child: Center(
-                   child: Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Text(
-                        _secondDef,
-                        style:  TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[500]),
-                      ),
-                   ),
-                 ),
-               ) : Text('') 
-                ,
               ],
             )
           ],
