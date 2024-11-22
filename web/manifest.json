@@ -1,6 +1,6 @@
 {
-    "name": "definition",
-    "short_name": "definition",
+    "name": "dictionary_app",
+    "short_name": "dictionary_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
