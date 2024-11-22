@@ -1,0 +1,1 @@
+ C:\\Users\\Administrator\\Desktop\\Career\ Projetcs\\daily\ ui\ challenge\\dictionary_app\\.dart_tool\\flutter_build\\9e7ebcef6e52c15ca17e74a8e8600e4f\\native_assets.yaml: 
